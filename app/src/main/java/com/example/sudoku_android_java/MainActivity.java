@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,14 +31,20 @@ public class MainActivity extends AppCompatActivity {
                 Spinner spinner = new Spinner(this);
                 spinner.setTag(R.id.fila,i);
                 spinner.setTag(R.id.col,j);
+                spinner.setTag("bug init");
                 spinner.setBackground(null);
                 spinner.setPadding(5, 5, 5, 5);
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
                         int fila = (int) adapterView.getTag(R.id.fila);
                         int col = (int) adapterView.getTag(R.id.col);
-                        String string = spinner.getSelectedItem().toString();
+                        if( spinner.getTag().equals("bug init")){
+                            spinner.setTag("hecho");
+                            return;
+                        }
+                        Toast.makeText(MainActivity.this, "fila: "+ fila +" columna: " + col + " nuevo valor: ", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
