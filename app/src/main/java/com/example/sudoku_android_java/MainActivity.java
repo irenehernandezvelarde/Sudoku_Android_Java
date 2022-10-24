@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         TableLayout table = findViewById(R.id.table);
 
         CharSequence[] nombres = {"X","1","2","3","4","5","6","7","8","9"};
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
                             spinner.setTag("hecho");
                             return;
                         }
-                        Toast.makeText(MainActivity.this, "fila: "+ fila +" columna: " + col + " nuevo valor: ", Toast.LENGTH_SHORT).show();
+                        String text = spinner.getSelectedItem().toString();
+                        Toast.makeText(MainActivity.this, "fila: "+ fila +" columna: " + col + " nuevo valor: "+text, Toast.LENGTH_SHORT).show();
 
                     }
 
