@@ -29,7 +29,7 @@ public class Model {
         }
     return true;
     }
-    
+
     private boolean comprovaCol(int columna) {
         for(int i=0; i < matriz.length; i++){
             int array []= new int[0];
@@ -44,14 +44,29 @@ public class Model {
     }
 
     private boolean comprovaQuad (int fila, int columna) {
-        if(comprovaFila(fila) && comprovaCol(columna)){
-            return true;
-        }
-        return false;
+    return true;
     }
 
     private void creaPartida () {
+        boolean bucle = true;
+        int contador = 0;
+        while(bucle){
+            int i = (int) (Math.random()*9);
+            int j = (int) (Math.random()*9);
+            int v = (int) (Math.random()*9);
+            if(getVal(i,j) == 0 && v>0){
+                setVal(v,i,j);
+                if(comprovaFila(i) && comprovaCol(j)){
+                    contador++;
 
+                } else{
+                    setVal(0,i,j);
+                }
+            }
+            if(contador == 20){
+                bucle = false;
+            }
+        }
     }
 
 }
