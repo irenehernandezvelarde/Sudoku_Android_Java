@@ -32,16 +32,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TableLayout tablita= findViewById(R.id.table);
-        CharSequence[] nombres = {"*","1","2","3","4","5","6","7","8","9"};
-
+        CharSequence[] nombres = {" ","1","2","3","4","5","6","7","8","9"};
 
         for(int i=0;i<9;i++){
-            TableRow rowy=new TableRow(this);
-            for(int j=0;j<9;j++){
+            TableRow rowy = new TableRow(this);
+            for(int j = 0; j < 9; j++){
 
-                Spinner sp=new Spinner(this);
-                sp.setBackground(null);
-                sp.setPadding(5, 5, 5, 5);
+                Spinner sp = new Spinner(this);
+                sp.setBackgroundResource(R.drawable.bordecito);
+                sp.setPadding(18, 18, 18, 18);
                 sp.setTag(R.id.col,j);
                 sp.setTag(R.id.fila,i);
                 sp.setTag("bug init");
@@ -55,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
                             sp.setTag("guay");
                             return;
                         }
-
-                        Toast.makeText(MainActivity.this, "fila: "+fila+" columna: "+col+" nuevo valor: "+k, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "fila: " + fila + " columna: " + col + " nuevo valor: " + k, Toast.LENGTH_SHORT).show();
                         //sp..setSelection(getIndex(spinner, myString));
                         //spinner.getItemAtPosition(i)
                         if(model.setVal(k,fila,col)>-1){
@@ -72,29 +70,31 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 });
-
-
                 ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
                         android.R.layout.simple_spinner_item, nombres);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 sp.setAdapter(adapter);
+                //AQUI IRIA EL CODIGO PARA HACERLO BONITO
                 this.matriu[i][j]=sp;
                 rowy.addView(this.matriu[i][j]);
-
-
             }
             tablita.addView(rowy);
-
         }
+        refrescaGUI();
         refrescaGUI();
 
     }
 
     private void refrescaGUI(){
         for(int i=0;i<9;i++) {
-
             for (int j = 0; j < 9; j++) {
-                matriu[i][j].setSelection(model.getVal(i,j));
+                if (matriu[i][j].getSelectedItem() != " "){
+                    matriu[i][j].setSelection(model.getVal(i,j));
+                    matriu[i][j].setEnabled(false);
+                }else {
+                    matriu[i][j].setSelection(model.getVal(i,j));
+                    matriu[i][j].setEnabled(true);
+                }
             }
         }
     }

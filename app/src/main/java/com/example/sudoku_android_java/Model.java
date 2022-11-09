@@ -85,20 +85,19 @@ public class Model {
 
     public void creaPartida(){
         Random rng = new Random();
-        int numsIntroduits = 20;
-        Log.i("Inputs",String.valueOf(numsIntroduits));
         int row = 0;
         int col = 0;
         int val = 0;
-        for (int a = 0; a < numsIntroduits; a++){
-            row = rng.nextInt(9-1);
-            col = rng.nextInt(9-1);
-            val = rng.nextInt(9-1)+1;
+        for (int a = 0; a < 50; a++){
+            row = (int) (Math.random() * 9);
+            col = (int) (Math.random() * 9);
+            val = (int) (Math.random() * 9);
+
             setVal(row,col,val);
             while (setVal(row,col,val) == -1){
                 Log.i("INFO","Regenerant nombre");
-                row = rng.nextInt(9-1);
-                col = rng.nextInt(9-1);
+                row = (int) (Math.random() * 9);
+                col = (int) (Math.random() * 9);
             }
         }
     }
